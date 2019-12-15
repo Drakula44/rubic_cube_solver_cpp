@@ -11,12 +11,7 @@ int main()
     cout << "mnozenje" << endl;
     (b*3).ispisi();
     cout << "gotovo"<<endl;
-    Matrica c = b.mnozenje(&b);
+    Matrica c = b*b;
     c.ispisi();
     cout << "gotovo"<<endl;
-    /*cout << "a" << endl;
-    (b*b).ispisi();
-    cout << "a" << endl;
-    (b*b).ispisi();
-    cout << "a" << endl;*/
 }

@@ -5,25 +5,15 @@ Matrica::Matrica(int _n,int _m)
 {
     this->n = _n;
     this->m = _m;
-    mat =  new double*[n];
-    for(int i = 0;i < n;i++)
-    {
-        mat[i] = new double[m];
-    }
     for(int i = 0;i < n;i++)
         for(int j = 0;j < m;j++)
             mat[i][j] = 0;
 }
 
-Matrica::Matrica(int _n,int _m,double** a)
+Matrica::Matrica(int _n,int _m,double a[3][3])
 {
     this->n = _n;
     this->m = _m;
-    mat =  new double*[n];
-    for(int i = 0;i < n;i++)
-    {
-        mat[i] = new double[m];
-    }
     for(int i = 0;i < n;i++)
         for(int j = 0;j < m;j++)
             mat[i][j] = a[i][j];
@@ -33,10 +23,8 @@ Matrica::Matrica(int _n,double* a)
 {
     this->n = _n;
     this->m = 1;
-    mat =  new double*[n];
     for(int i = 0;i < n;i++)
     {
-        mat[i] = new double[1];
         mat[i][0] = a[i];
     }
 }
@@ -107,40 +95,25 @@ Matrica Matrica::operator*(int const &obj)
     return b;
 }
 
-Matrica Matrica::mnozenje(Matrica *obj)
+Matrica Matrica::operator*(Matrica const &obj)
 {
-    fflush(stdout);
-    printf("aa");
-    cout << "aaa";
-    /*if(this->m != obj.n)
+    if(this->m != obj.n)
     {
-        cout << "lol";
         return Matrica::E(1);
-    }*/
-     cout << "aaa";   
-    Matrica b(this->n,obj->m);
+    }
+    Matrica b(this->n,obj.m);
     for(int i = 0;i < this->n;i++)
     {
-        cout << "aaa";
-        for(int j = 0;j < obj->m;j++)
+        for(int j = 0;j < obj.m;j++)
         {
             
             double lol = 0;
             for(int k = 0;k < this->m;k++)
-                lol += this->mat[i][k]*obj->mat[k][j];
+                lol += this->mat[i][k]*obj.mat[k][j];
             b.mat[i][j] = lol;
         }
     }
     return b;
-}
-
-Matrica::~Matrica()
-{
-    for(int i = 0;i < n;i++)
-    {
-        delete mat[m];
-    }
-    delete mat;
 }
 
 void Matrica::ispisi()
