@@ -1,6 +1,11 @@
 #include "matrica.h"
 #include <bits/stdc++.h>
 using namespace std;
+Matrica::Matrica()
+{
+    this->m = 0;
+    this->n = 0;/* args */
+}
 Matrica::Matrica(int _n,int _m)
 {
     this->n = _n;

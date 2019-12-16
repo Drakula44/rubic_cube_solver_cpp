@@ -59,7 +59,7 @@ void Grafika::update(void drawCube())
 
     drawCube();
 
-    // Update Screen
+    // Update 
     glfwSwapBuffers(window);
 
     // Check for any input, or window movement
