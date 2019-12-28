@@ -1,4 +1,4 @@
-#include "matrica.h"
+#include "../headers/matrica.h"
 #include <bits/stdc++.h>
 using namespace std;
 Matrica::Matrica()

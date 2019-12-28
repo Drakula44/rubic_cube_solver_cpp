@@ -1,12 +1,10 @@
-#include "grafika.h"
+#include "../headers/grafika.h"
 
 void Grafika::controls(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    if(action == GLFW_PRESS)
-        if(key == GLFW_KEY_ESCAPE)
             glfwSetWindowShouldClose(window, GL_TRUE);
 }
-
+//komentar
 Grafika::Grafika(const int resX, const int resY)
 {
     if(!glfwInit())
@@ -59,7 +57,7 @@ void Grafika::update(void drawCube())
 
     drawCube();
 
-    // Update 
+    // Update
     glfwSwapBuffers(window);
 
     // Check for any input, or window movement

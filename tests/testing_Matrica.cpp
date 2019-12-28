@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include "matrica.h"
+#include "../headers/matrica.h"
 
 using namespace std;
 
