@@ -2,7 +2,7 @@
 class kocka
 {
 private:
-    kockica nesto[3][3][3];
+    int nesto[3][3][3];
 
 public:
     kocka(/* args */);
