@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "mutex": "cpp",
+        "typeinfo": "cpp",
+        "*.tcc": "cpp",
+        "algorithm": "cpp",
+        "random": "cpp",
+        "regex": "cpp",
+        "variant": "cpp",
+        "*.def": "cpp",
+        "condition_variable": "cpp"
+    },
+    "git.ignoreLimitWarning": true
+}

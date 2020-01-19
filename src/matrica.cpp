@@ -1,10 +1,10 @@
-#include "../headers/matrica.h"
+#include "../headers/kocka.h"
 #include <bits/stdc++.h>
 using namespace std;
 Matrica::Matrica()
 {
-    this->m = 0;
-    this->n = 0;/* args */
+    this->m = 1;
+    this->n = 3;/* args */
 }
 Matrica::Matrica(int _n,int _m)
 {
@@ -87,7 +87,7 @@ Matrica Matrica::E(int _n)
     return b;
 }
 
-Matrica Matrica::operator*(int const &obj)
+Matrica Matrica::operator*(double const &obj)
 {
     Matrica b(this->n,this->m);
     for(int i = 0;i < this->n;i++)
@@ -100,7 +100,7 @@ Matrica Matrica::operator*(int const &obj)
     return b;
 }
 
-Matrica Matrica::operator*(Matrica const &obj)
+Matrica Matrica::operator*(Matrica const &obj) const
 {
     if(this->m != obj.n)
     {
@@ -132,3 +132,25 @@ void Matrica::ispisi()
         std::cout << '\n';
     }
 }
+
+Matrica Matrica::operator+(Matrica const &obj)
+{
+    Matrica b(this->n,this->m);
+    for(int i = 0;i < this->n;i++)
+    {
+        for(int j = 0;j < this->m;j++)
+        {
+            b.mat[i][j] = this->mat[i][j]*obj.mat[i][j];
+        }
+    }
+    return b;
+
+}
+
+
+
+
+
+
+
+

@@ -1,11 +1,13 @@
-#include "kockica.h"
-class kocka
+#include "kocka.h"
+class RubikovaKocka
 {
 private:
-    int nesto[3][3][3];
-
+    Kocka rubikova[3][3][3];
 public:
-    kocka(/* args */);
+    RubikovaKocka();
+
+    void setKocka(int i,int j,int k, Kocka a){rubikova[i][j][k] = a;}
+    Kocka getKocka(int i,int j,int k){return rubikova[i][j][k];}
     void kazaljka_pz();
     void kazaljka_mz();
     void suprotno_pz();
@@ -20,8 +22,6 @@ public:
     void kazaljka_mx();
     void suprotno_px();
     void suprotno_mx();
-
-    void vrati_kocku();
     
 };
 
