@@ -1,5 +1,7 @@
 rubik:   matrica.o kocka.o strana.o  rubikovakocka.o grafika.o main.o
-	g++ -g -o rubik matrica.o kocka.o strana.o  rubikovakocka.o grafika.o main.o -lglfw -lGLU -lGL
+	g++ -g -o rubik matrica.o strana.o kocka.o   rubikovakocka.o grafika.o main.o -lglfw -lGLU -lGL
+test:   matrica.o kocka.o strana.o  rubikovakocka.o grafika.o main.o
+	g++ -g -o test matrica.o strana.o kocka.o   rubikovakocka.o grafika.o main.o -lglfw -lGLU -lGL ; ./test
 grafika.o: ./src/grafika.cpp ./headers/grafika.h
 	g++ -g -c -pthread -I/sw/include/root src/grafika.cpp
 kocka.o: ./src/kocka.cpp ./headers/kocka.h

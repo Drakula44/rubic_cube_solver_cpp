@@ -2,26 +2,21 @@
 class RubikovaKocka
 {
 private:
-    Kocka rubikova[3][3][3];
 public:
-    RubikovaKocka();
-
-    void setKocka(int i,int j,int k, Kocka a){rubikova[i][j][k] = a;}
-    Kocka getKocka(int i,int j,int k){return rubikova[i][j][k];}
-    void kazaljka_pz();
-    void kazaljka_mz();
-    void suprotno_pz();
-    void suprotno_mz();
-
-    void kazaljka_py();
-    void kazaljka_my();
-    void suprotno_py();
-    void suprotno_my();
-
-    void kazaljka_px();
-    void kazaljka_mx();
-    void suprotno_px();
-    void suprotno_mx();
+    RubikovaKocka(){}
+    static Kocka kocka[3][3][3];
+    static void kazaljka_pz();
+    static void kazaljka_mz();
+    static void suprotno_pz();
+    static void suprotno_mz();
+    static void kazaljka_py();
+    static void kazaljka_my();
+    static void suprotno_py();
+    static void suprotno_my();
+    static void kazaljka_px();
+    static void kazaljka_mx();
+    static void suprotno_px();
+    static void suprotno_mx();
     
 };
 

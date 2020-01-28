@@ -9,7 +9,12 @@
         "regex": "cpp",
         "variant": "cpp",
         "*.def": "cpp",
-        "condition_variable": "cpp"
+        "condition_variable": "cpp",
+        "unordered_map": "cpp",
+        "fstream": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "sstream": "cpp"
     },
     "git.ignoreLimitWarning": true
 }

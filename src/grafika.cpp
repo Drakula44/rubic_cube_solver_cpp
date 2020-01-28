@@ -1,6 +1,7 @@
 #include "../headers/grafika.h"
 
 #include <iostream>
+#include <cmath>
 using namespace std;
 #define PI 3.141592653589793
 void Grafika::controls(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -12,18 +13,67 @@ void Grafika::controls(GLFWwindow* window, int key, int scancode, int action, in
     if(glfwGetKey(window,GLFW_KEY_A) == GLFW_PRESS)rx-=inc;
     if(glfwGetKey(window,GLFW_KEY_S) == GLFW_PRESS)ry-=inc;
     if(glfwGetKey(window,GLFW_KEY_D) == GLFW_PRESS)rz-=inc;
-    
-    if(glfwGetKey(window,GLFW_KEY_J) == GLFW_PRESS)rotation=1;
-    if(glfwGetKey(window,GLFW_KEY_K) == GLFW_PRESS)rotation=2;
-    if(glfwGetKey(window,GLFW_KEY_L) == GLFW_PRESS)rotation=3;
-    if(glfwGetKey(window,GLFW_KEY_U) == GLFW_PRESS)rotation=-1;
-    if(glfwGetKey(window,GLFW_KEY_I) == GLFW_PRESS)rotation=-2;
-    if(glfwGetKey(window,GLFW_KEY_O) == GLFW_PRESS)rotation=-3;
-    
+    if(rangle == 0)
+    {
+        if(glfwGetKey(window,GLFW_KEY_J) == GLFW_PRESS)
+        {
+            if (mods == GLFW_MOD_SHIFT) {
+                    rotation=1;
+            }
+            else {
+                    rotation=-1;
+            }
+        }
+        if(glfwGetKey(window,GLFW_KEY_K) == GLFW_PRESS)
+        {
+            if (mods == GLFW_MOD_SHIFT) {
+                    rotation=2;
+            }
+            else {
+                    rotation=-2;
+            }
+        }
+        if(glfwGetKey(window,GLFW_KEY_L) == GLFW_PRESS)
+        {
+            if (mods == GLFW_MOD_SHIFT) {
+                    rotation=3;
+            }
+            else {
+                    rotation=-3;
+            }
+        }
+        if(glfwGetKey(window,GLFW_KEY_U) == GLFW_PRESS)
+        {
+            if (mods == GLFW_MOD_SHIFT) {
+                    rotation=4;
+            }
+            else {
+                    rotation=-4;
+            }
+        }
+        if(glfwGetKey(window,GLFW_KEY_I) == GLFW_PRESS)
+        {
+            if (mods == GLFW_MOD_SHIFT) {
+                    rotation=5;
+            }
+            else {
+                    rotation=-5;
+            }
+        }
+        if(glfwGetKey(window,GLFW_KEY_O) == GLFW_PRESS)
+        {
+            if (mods == GLFW_MOD_SHIFT) {
+                    rotation=6;
+            }
+            else {
+                    rotation=-6;
+            }
+        }    
+    }
+    //cout << rotation << endl;
     if(action == GLFW_PRESS)
         if(key == GLFW_KEY_ESCAPE)
             glfwSetWindowShouldClose(window, GL_TRUE);
-    cout << rx << " " << ry << " " << rz << endl;
     
 }
 //komentar
@@ -64,7 +114,7 @@ Grafika::Grafika(const int resX, const int resY)
     glDepthFunc(GL_LEQUAL);
     glDisable(GL_CULL_FACE);
     glCullFace(GL_BACK);
-    
+
     init();
     int u = 0;
     for(int i = 0;i < 3;i++)
@@ -92,22 +142,30 @@ void Grafika::update()
 
     // Draw stuff
     glClearColor(0.0, 0.8, 0.3, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glMatrixMode(GL_PROJECTION_MATRIX);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    drawCube();
+
+    //(GL_PROJECTION_MATRIX);
     glLoadIdentity();
+
     gluPerspective( 60, (double)windowWidth / (double)windowHeight, 0.1, 100 );
 
-    glMatrixMode(GL_MODELVIEW_MATRIX);
-    glTranslatef(0,0,-5);
 
-    drawCube();
+    glMatrixMode(GL_MODELVIEW_MATRIX);
+
+    glTranslatef(0,0,-10);
+
+
+    
 
     // Update
     glfwSwapBuffers(window);
 
+
     // Check for any input, or window movement
     glfwPollEvents();
+
 }
 
 bool Grafika::ShouldClose()
@@ -142,7 +200,225 @@ Kocka operator*(Matrica const &nes,Kocka const &obj)
     {
         tmp.setStrana(i,nes * tmp2.getStrana(i));
     }
+    tmp.id = obj.id;
     return tmp;
+}
+
+double Pitagora(Matrica a,Matrica b)
+{
+    double sum = 0;
+    for(int i = 0;i < 3;i++)
+    {
+        sum += (a.getE(i)-b.getE(i))*(a.getE(i)-b.getE(i));
+    }
+    sqrt(sum);
+    return sum;
+}
+
+void Grafika::sideRotation(Kocka (& tmp)[3][3][3])
+{
+    if(rotation == 0)
+        return;
+    rangle /= 3;
+    for(int i = 0;i < 3;i++)
+    {
+        for(int j = 0;j < 3;j++)
+        {
+            for(int k = 0;k < 3;k++)
+            {
+                int ti = i;
+                int tj = j;
+                int tk = k;
+                switch (abs(rotation))
+                {
+                case 1:
+                    i = 0;
+                    tmp[i][j][k] =  Matrica::Rx(Grafika::rangle)*tmp[i][j][k] ;
+                    break;
+                case 4:
+                    i = 2;
+                    tmp[i][j][k] =  Matrica::Rx(Grafika::rangle)*tmp[i][j][k] ;
+                    break;
+                case 2:
+                    j = 0;
+                    tmp[i][j][k] =  Matrica::Ry(Grafika::rangle)*tmp[i][j][k] ;
+                    break;
+                case 5:
+                    j = 2;
+                    tmp[i][j][k] =  Matrica::Ry(Grafika::rangle)*tmp[i][j][k] ;
+                    break;
+                case 3:
+                    k = 0;
+                    tmp[i][j][k] =  Matrica::Rz(Grafika::rangle)*tmp[i][j][k] ;
+                    break;
+                case 6:
+                    k = 2;
+                    tmp[i][j][k] =  Matrica::Rz(Grafika::rangle)*tmp[i][j][k] ;
+                    break;
+                default:
+                    break;
+                }
+                i = ti;
+                j = tj;
+                k = tk;
+            }
+        }
+    }
+    rangle *= 3;
+
+    bool provera[3][3][3] ={0};
+    if(abs(rangle) >= PI/2)
+    {
+        if(rangle < 0)
+            rangle = -PI/2;
+        else
+            rangle = +PI/2;
+        for(int i = 0;i < 3;i++)
+        {
+            for(int j = 0;j < 3;j++)
+            {
+                for(int k = 0;k < 3;k++)
+                {
+                    if(provera[i][j][k] == true)
+                        continue;
+                    int ti = i;
+                    int tj = j;
+                    int tk = k;
+                    switch (abs(rotation))
+                    {
+                    case 1:
+                        ti = 0;
+                        if(provera[ti][tj][tk] == true)
+                        continue;
+                        if(rangle < 0)
+                            RubikovaKocka::kocka[ti][tj][tk].kazaljka_x();
+                        if(rangle > 0)
+                            RubikovaKocka::kocka[ti][tj][tk].suprotno_x();
+                        RubikovaKocka::kocka[ti][tj][tk] = Matrica::Rx(Grafika::rangle)*RubikovaKocka::kocka[ti][tj][tk];
+                        break;
+                    case 4:
+                        ti = 2;
+                        if(provera[ti][tj][tk] == true)
+                        continue;
+                        if(rangle < 0)
+                            RubikovaKocka::kocka[ti][tj][tk].kazaljka_x();
+                        if(rangle > 0)
+                            RubikovaKocka::kocka[ti][tj][tk].suprotno_x();
+                        RubikovaKocka::kocka[ti][tj][tk] = Matrica::Rx(Grafika::rangle)*RubikovaKocka::kocka[ti][tj][tk];
+                        break;
+                    case 2:
+                        tj = 0;
+                        if(provera[ti][tj][tk] == true)
+                        continue;
+                        if(rangle < 0)
+                            RubikovaKocka::kocka[ti][tj][tk].kazaljka_y();
+                        if(rangle > 0)
+                            RubikovaKocka::kocka[ti][tj][tk].suprotno_y();
+                        RubikovaKocka::kocka[ti][tj][tk] = Matrica::Ry(Grafika::rangle)*RubikovaKocka::kocka[ti][tj][tk];
+                        break;
+                    case 5:
+                        tj = 2;
+                        if(provera[ti][tj][tk] == true)
+                        continue;
+                        if(rangle < 0)
+                            RubikovaKocka::kocka[ti][tj][tk].kazaljka_y();
+                        if(rangle > 0)
+                            RubikovaKocka::kocka[ti][tj][tk].suprotno_y();
+                        RubikovaKocka::kocka[ti][tj][tk] = Matrica::Ry(Grafika::rangle)*RubikovaKocka::kocka[ti][tj][tk];
+                        break;
+                    case 3:
+                        tk = 0;
+                        if(provera[ti][tj][tk] == true)
+                        continue;
+                        if(rangle < 0)
+                            RubikovaKocka::kocka[ti][tj][tk].kazaljka_z();
+                        if(rangle > 0)
+                            RubikovaKocka::kocka[ti][tj][tk].suprotno_z();
+                        RubikovaKocka::kocka[ti][tj][tk] = Matrica::Rz(Grafika::rangle)*RubikovaKocka::kocka[ti][tj][tk];
+                        break;
+                    case 6:
+                        tk = 2;
+                        if(provera[ti][tj][tk] == true)
+                        continue;
+                        if(rangle < 0)
+                            RubikovaKocka::kocka[ti][tj][tk].kazaljka_z();
+                        if(rangle > 0)
+                            RubikovaKocka::kocka[ti][tj][tk].suprotno_z();
+                        RubikovaKocka::kocka[ti][tj][tk] = Matrica::Rz(Grafika::rangle)*RubikovaKocka::kocka[ti][tj][tk];
+                        break;
+                    }
+                    provera[ti][tj][tk] = true;
+                }
+            }
+        }
+        switch (abs(rotation))
+        {
+        case 1:
+            if(rangle < 0)
+                RubikovaKocka::kazaljka_mx();
+            if(rangle > 0)
+                RubikovaKocka::suprotno_mx();
+            break;
+        case 4:
+            if(rangle < 0)
+                RubikovaKocka::kazaljka_px();
+            if(rangle > 0)
+                RubikovaKocka::suprotno_px();
+            break;
+        case 2:
+            if(rangle < 0)
+                RubikovaKocka::kazaljka_my();
+            if(rangle > 0)
+                RubikovaKocka::suprotno_my();
+            break;
+        case 5:
+            if(rangle < 0)
+                RubikovaKocka::suprotno_py();
+            if(rangle > 0)
+                RubikovaKocka::kazaljka_py();
+            break;
+        case 3:
+            if(rangle < 0)
+                RubikovaKocka::suprotno_mz();
+            if(rangle > 0)
+                RubikovaKocka::kazaljka_mz();
+            break;
+        case 6:
+            if(rangle < 0)
+                RubikovaKocka::suprotno_pz();
+            if(rangle > 0)
+                RubikovaKocka::kazaljka_pz();
+            break;
+        default:
+            break;
+        }
+        cout << rotation << endl;
+        cout << "#################"<< endl;
+        for(int i = 0;i < 3;i ++)
+        {
+            cout << "__________" << endl;
+            for(int j = 0;j < 3;j++)
+            {
+                for(int k = 2;k >= 0;k --)
+                    cout << RubikovaKocka::kocka[k][j][i].id << " ";
+                cout << endl;
+            }
+            cout << endl;
+            cout << "___________"<< endl;
+        }
+        cout << "#################"<< endl;
+        rotation = 0;
+        rangle = 0;
+    }
+    else
+    {
+        if(rotation < 0)
+            rangle += 0.15;
+        else if(rotation > 0)
+            rangle -= 0.15;
+    }
+    
+    
 }
 
 void Grafika::drawCube()
@@ -153,31 +429,13 @@ void Grafika::drawCube()
         for(int j = 0;j < 3;j++)
         {
             for(int k = 0;k < 3;k++)
-                tmp[i][j][k] = kocka[i][j][k];
-        }
-    }
-    if(rotation == 1)
-    {
-        int i = 0;
-        for(int j = 0;j < 3;j++)
-        {
-            for(int k = 0;k < 3;k++)
             {
-                        tmp[i][j][k] =  Matrica::Rx(Grafika::rangle)*tmp[i][j][k] ;
+                //cout << RubikovaKocka::kocka[i][j][k].id << " ";
+                tmp[i][j][k] = RubikovaKocka::kocka[i][j][k];
             }
         }
-        if(rangle >= PI/2)
-        {
-            rangle = 0;
-            rotation = 0;
-            //TODO petrovic rotacija matrice
-        }
-        else
-        {
-            rangle += 0.05;
-        }
     }
-    cout << "###############################################"<<endl;
+    sideRotation(tmp);
     for(int i = 0;i < 3;i++)
     {
         for(int j = 0;j < 3;j++)
@@ -188,19 +446,11 @@ void Grafika::drawCube()
                 tmp[i][j][k] =   Matrica::Ry(Grafika::ry)*tmp[i][j][k] ;
                 tmp[i][j][k] =  Matrica::Rz(Grafika::rz)*tmp[i][j][k];
                 tmp[i][j][k] =  tmp[i][j][k]*(1/3.0);
-                for(int ii = 0;ii < 6;ii++)
-                {
-                    for(int jj = 0;jj < 4;jj++)
-                    {
-                        tmp[i][j][k].getStrana(ii).getMatrica(jj).ispisi();
-                        cout << endl;
-                    }
-                    cout << "___________________" << endl;
-                }
+                double gg[3] = {0,0,2};
+                tmp[i][j][k] = tmp[i][j][k] + Matrica(3,gg);
             }
         }
     }
-    cout << "###############################################"<<endl;
     int vert = 0;
     for(int i = 0;i < 3;i++)
     {
@@ -214,43 +464,23 @@ void Grafika::drawCube()
                     {
                         for(int kk = 0;kk<3;kk++)
                         {
-                            //if(u >= 72*2) break;
                             vertices[vert] = tmp[i][j][k].getStrana(ii).getMatrica(jj).getE(kk);
                             colors[vert] = tmp[i][j][k].getStrana(ii).getBoja().getE(kk);
-                            colors[vert] = 0.5;
                             vert += 1;
                         }
-                        //cout << endl;
                     }   
                 }
             }
         }
     }/*
     GLfloat colors[] = 
-    {
-        0, 0, 1,   0, 0, 1,   0, 0, 1,   0, 0, 1,
-        0, 1, 0,   0, 1, 0,   0, 1, 0,  0, 1, 0,
-        1, 0, 0,   1, 0, 0,   1, 0, 0,   1, 0, 0,
-        1, 1, 1,   1, 1, 1,   1, 1, 1,  1, 1, 1,   
-        1, 0.5,0,  1, 0.5,0,  1, 0.5,0,  1, 0.5,0,  
-        1, 1, 0,    1, 1, 0,    1, 1, 0,  1, 1, 0 ,
-        0, 0, 0,   0, 0, 0,   0, 0, 0,  0, 0, 0,
-        0, 0, 1,   0, 0, 1,   0, 0, 1,   0, 0, 1,
-        0, 1, 0,   0, 1, 0,   0, 1, 0,  0, 1, 0,
-        1, 0, 0,   1, 0, 0,   1, 0, 0,   1, 0, 0,
-        1, 1, 1,   1, 1, 1,   1, 1, 1,  1, 1, 1,   
-        1, 0.5,0,  1, 0.5,0,  1, 0.5,0,  1, 0.5,0,  
-        1, 1, 0,    1, 1, 0,    1, 1, 0,  1, 1, 0 ,
-        0, 0, 0,   0, 0, 0,   0, 0, 0,  0, 0, 0
-    };   /*/ 
-
     /* We have a color array and atmp vertex array */
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
     glVertexPointer(3, GL_FLOAT, 0, vertices);
     glColorPointer(3, GL_FLOAT, 0, colors);
     /* Send data : 24 vertices */
-    glDrawArrays(GL_QUADS, 0, vert);
+    glDrawArrays(GL_QUADS, 0, vert-1);
     /* Cleanup states */
     glDisableClientState(GL_COLOR_ARRAY);
     glDisableClientState(GL_VERTEX_ARRAY);
@@ -274,7 +504,7 @@ void Grafika::init()
     double b9 [3] ={ 3, 3, 3};
     double b10[3] ={ 3, 3, 1};
     double b11[3] ={ 1, 3, 1};
-    double b12[3] ={ 1, 3, 3};
+    double b12[3] ={ 1, 3, 3};                        
 
     double b13[3] ={ 3, 1, 3};
     double b14[3] ={ 3, 1, 1};
@@ -331,78 +561,53 @@ void Grafika::init()
     Matrica mnarandzasta(3, narandzasta);
     Matrica mzelena(3, zelena);
     Matrica mplava(3, plava);
-
+/*
     Strana strana1(mb1, mb2, mb3, mb4, mbela);
     Strana strana2(mb5, mb6, mb7, mb8, mzuta);
     Strana strana3(mb9, mb10, mb11, mb12, mcrvena);
     Strana strana4(mb13, mb14, mb15, mb16, mnarandzasta);
     Strana strana5(mb17, mb18, mb19, mb20, mzelena);
     Strana strana6(mb21, mb22, mb23, mb24, mplava);
-1
+*/
+    Strana strana1(mb1, mb2, mb3, mb4, mzelena);
+    Strana strana2(mb5, mb6, mb7, mb8, mplava);
+    Strana strana3(mb9, mb10, mb11, mb12, mcrvena);
+    Strana strana4(mb13, mb14, mb15, mb16, mnarandzasta);
+    Strana strana5(mb17, mb18, mb19, mb20, mbela);
+    Strana strana6(mb21, mb22, mb23, mb24, mzuta);
+
     Kocka kockakocka(strana1, strana2, strana3, strana4, strana5, strana6);
-    
-    for(int i = 0; i < 1   ; i++)
+    int br = 1;
+    for(int i = 0; i < 3; i++)
     {
-        for(int j = 0; j < 1; j++)
+        for(int j = 0; j < 3; j++)
         {
-            for(int p = 0; p < 1; p++)
+            for(int p = 0; p <3; p++)
             {
-                Kocka tmp;
-                //tmp = *(new Kocka);
-                double broj[3];
+                RubikovaKocka::kocka[i][j][p].id = br;
+                if(true|| (i == 0 && j == 0 && p == 0) || (i == 2 && j == 2 && p == 2))
+                {double broj[3];
                 broj[0] = -i*2;
                 broj[1] = -j*2;
                 broj[2] = -p*2;
                 Matrica lol(3,broj);
-                for(int ii = 0;ii < 6;ii++)
-                {
-
-                    //tmp.setStrana(ii,*(new Strana));  
-                    //tmp.setStrana(ii,kockakocka.getStrana(ii));  
-                    tmp.setStrana(ii,Strana());
-                    tmp.getStrana(ii).setBoja(kockakocka.getStrana(ii).getBoja());  
-                    for(int jj = 0;jj < 4;jj++)
-                    {
-                        tmp.getStrana(ii).setMatrica(jj,lol+kockakocka.getStrana(ii).getMatrica(jj));
-
-                        cout << "kul"  << endl;
-                        kockakocka.getStrana(ii).getMatrica(jj).ispisi();
-                        (lol+kockakocka.getStrana(ii).getMatrica(jj)).ispisi();
-                        lol.ispisi();
-                        cout << "lol" << endl;
-                        //tmp.getStrana(ii).setMatrica(jj,*(new Matrica))
-                        //tmp.getStrana(ii).setMatrica(jj,kockakocka.getStrana(ii).getMatrica(jj));
-                        /*cout << "lol" << endl;
-                        lol.ispisi();
-                        cout << "lol" << endl;
-                        //tmp.getStrana(ii).getMatrica(jj).ispisi();
-                        for(int kk = 0;kk<3;kk++)
-                        {
-                            //if(u >= 72*2) break;
-                            cout << kockakocka.getStrana(ii).getMatrica(jj).getE(kk)+lol.getE(kk) << endl;
-                            tmp.getStrana(ii).getMatrica(jj).setE(kk,kockakocka.getStrana(ii).getMatrica(jj).getE(kk)+lol.getE(kk));
-                            //
-                            cout << tmp.getStrana(ii).getMatrica(jj).getE(kk) << " ";
-                        }
-                        //tmp.getStrana(ii).setMatrica(jj,lol+kockakocka.getStrana(ii).getMatrica(jj));
-                        //tmp.getStrana(ii).getMatrica(jj).ispisi();
-                        //tmp.getStrana(ii).getMatrica(jj).ispisi();
-                        cout << "lol" << endl;*/
-                        tmp.getStrana(ii).getMatrica(jj).ispisi();
-                    }
+                RubikovaKocka::kocka[i][j][p] = kockakocka + lol;
                 }
-                kocka[i][j][p] = tmp;
-                cout << endl;
-            }        
+                if(!(i == 1 && j == 1 && p == 1))
+                {
+                    RubikovaKocka::kocka[i][j][p].id = br;
+                    br++;
+                }
+                else
+                {
+                    RubikovaKocka::kocka[i][j][p].id = 0;
+                }
 
-
-                cout << endl;
+            }    
+              
         }
-
-                cout << endl;
     }
-    cin.get();
-    return;
+    
 }
 
 

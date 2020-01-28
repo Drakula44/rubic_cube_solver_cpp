@@ -2,13 +2,13 @@
 #include <GLFW/glfw3.h>
 #include <vector>
 #include <cstdio>
-#include "kocka.h"
+#include "rubikovakocka.h"
 class Grafika
 {
 private:
     GLFWwindow* window;
-    Kocka kocka[3][3][3];
-    Matrica kocka_proba[3][3][3][6][4];
+    //Kocka kocka[3][3][3];
+    //Matrica kocka_proba[3][3][3][6][4];
     GLfloat *vertices;
     GLfloat *colors;
     static int rotation;
@@ -20,6 +20,7 @@ public:
     ~Grafika();
     static void controls(GLFWwindow* window, int key, int scancode, int action, int mods);
     void drawCube();
+    void sideRotation(Kocka (& tmp)[3][3][3]);
     void update();
     void init();
     bool ShouldClose();

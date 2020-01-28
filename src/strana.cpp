@@ -2,10 +2,10 @@
 
 Strana::Strana(Matrica a1,Matrica a2,Matrica a3,Matrica a4, Matrica boja)
 {
-    str[0] = a1;
-    str[1] = a2;
-    str[2] = a3;
-    str[3] = a4;
+    this->str[0] = a1;
+    this->str[1] = a2;
+    this->str[2] = a3;
+    this->str[3] = a4;
     this->boja = boja;
 }
 
@@ -43,4 +43,12 @@ Strana Strana::operator+(Matrica const &obj)
     return tmp;
 }
 
-
+/*
+Strana Strana::operator=(const Strana &obj)
+    {
+        Strana a;
+        a.setBoja(obj.getBoja());
+        for(int i = 0;i < 4;i++)
+                a.str[i] = obj.str[i];
+        return a;
+    }*/

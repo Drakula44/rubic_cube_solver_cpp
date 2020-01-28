@@ -1,4 +1,6 @@
-#include "iostream"
+#include <iostream>
+using namespace std;
+
 class Matrica
 {
 private:
@@ -17,11 +19,7 @@ public:
     Matrica operator*(double const &obj);
     Matrica operator*(Matrica const &obj) const;
     Matrica operator+(Matrica const &obj);
-    Matrica operator=(const Matrica &obj)
-    {
-        for(int i = 0;i < 3;i++)
-                mat[i][0] = obj.mat[i][0];
-    }
+    //Matrica operator=(const Matrica &obj);
     void ispisi();
     double getE(int i)
     {
@@ -31,10 +29,7 @@ public:
     }
     void setE(int i,double a)
     {
-        std::cout << "koji kurac " << a << " " << n << " ";
-        mat[i][0] = a;
-        std::cout << mat[i][0] <<" " << this->getE(i) << " a";
-    
+        mat[i][0] = a;    
     }
 };
 

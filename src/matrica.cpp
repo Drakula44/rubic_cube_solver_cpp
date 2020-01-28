@@ -123,6 +123,9 @@ Matrica Matrica::operator*(Matrica const &obj) const
 
 void Matrica::ispisi()
 {
+
+    cout << "DEBUG" << endl;
+    cout << "n:" << n <<" m:"<< m<< endl;
     for(int i = 0;i < this->n;i++)
     {
         for(int j = 0;j < this->m;j++)
@@ -131,6 +134,9 @@ void Matrica::ispisi()
         }
         std::cout << '\n';
     }
+
+        cout << "END_DEBUG";
+        std::cout << '\n';
 }
 
 Matrica Matrica::operator+(Matrica const &obj)
@@ -140,14 +146,24 @@ Matrica Matrica::operator+(Matrica const &obj)
     {
         for(int j = 0;j < this->m;j++)
         {
-            b.mat[i][j] = this->mat[i][j]*obj.mat[i][j];
+            b.mat[i][j] = this->mat[i][j]+obj.mat[i][j];
         }
     }
     return b;
 
 }
+/*
+Matrica Matrica::operator=(const Matrica &obj)
+    {
+        Matrica a(obj.n,obj.m);
+        //cout << "sta??????" << endl;
 
-
+        for(int i = 0;i < 3;i++)
+                a.mat[i][0] = obj.mat[i][0];
+        //a.ispisi();
+        //cout << "sta??????" << endl;
+        return a;
+    }*/
 
 
 

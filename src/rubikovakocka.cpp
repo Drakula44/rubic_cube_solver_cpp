@@ -1,181 +1,188 @@
 #include "../headers/rubikovakocka.h"
-
-void RubikovaKocka::kazaljka_pz()
-{
-    Kocka tmp; 
-    tmp=rubikova[1][3][3];
-    rubikova[1][3][3]=rubikova[1][1][3];
-    rubikova[1][1][3]=rubikova[3][1][3];
-    rubikova[3][1][3]=rubikova[3][3][3];
-    rubikova[3][3][3]=tmp;
-    tmp=rubikova[2][3][3];
-    rubikova[2][3][3]=rubikova[1][2][3];
-    rubikova[1][2][3]=rubikova[2][1][3];
-    rubikova[2][1][3]=rubikova[3][2][3];
-    rubikova[3][2][3]=tmp;
-}
-
-void RubikovaKocka::kazaljka_mz()
-{
-    Kocka tmp;
-    tmp=rubikova[1][3][1];
-    rubikova[1][3][1]=rubikova[1][1][1];
-    rubikova[1][1][1]=rubikova[3][1][1];
-    rubikova[3][1][1]=rubikova[3][3][1];
-    rubikova[3][3][1]=tmp;
-    tmp=rubikova[2][3][1];
-    rubikova[2][3][1]=rubikova[1][2][1];
-    rubikova[1][2][1]=rubikova[2][1][1];
-    rubikova[2][1][1]=rubikova[3][2][1];
-    rubikova[3][2][1]=tmp;
-}
-
+#include <iostream>
+using namespace std;
+Kocka RubikovaKocka::kocka[3][3][3];
 void RubikovaKocka::suprotno_pz()
 {
-    Kocka tmp;
-    tmp=rubikova[1][3][3];
-    rubikova[1][3][3]=rubikova[3][3][3];
-    rubikova[3][3][3]=rubikova[3][1][3];
-    rubikova[3][1][3]=rubikova[1][1][3];
-    rubikova[1][1][3]=tmp;
-    tmp=rubikova[2][3][3];
-    rubikova[2][3][3]=rubikova[3][2][3];
-    rubikova[3][2][3]=rubikova[2][1][3];
-    rubikova[2][1][3]=rubikova[1][2][3];
-    rubikova[1][2][3]=tmp;
+    Kocka tmp; 
+   
+    tmp=RubikovaKocka::kocka[0][2][2];
+    RubikovaKocka::kocka[0][2][2]=RubikovaKocka::kocka[0][0][2];
+    RubikovaKocka::kocka[0][0][2]=RubikovaKocka::kocka[2][0][2];
+    RubikovaKocka::kocka[2][0][2]=RubikovaKocka::kocka[2][2][2];
+    RubikovaKocka::kocka[2][2][2]=tmp;
+    tmp=RubikovaKocka::kocka[1][2][2];
+    RubikovaKocka::kocka[1][2][2]=RubikovaKocka::kocka[0][1][2];
+    RubikovaKocka::kocka[0][1][2]=RubikovaKocka::kocka[1][0][2];
+    RubikovaKocka::kocka[1][0][2]=RubikovaKocka::kocka[2][1][2];
+    RubikovaKocka::kocka[2][1][2]=tmp;
 }
 
 void RubikovaKocka::suprotno_mz()
 {
     Kocka tmp;
-    tmp=rubikova[1][3][1];
-    rubikova[1][3][1]=rubikova[3][3][1];
-    rubikova[3][3][1]=rubikova[3][1][1];
-    rubikova[3][1][1]=rubikova[1][1][1];
-    rubikova[1][1][1]=tmp;
-    tmp=rubikova[2][3][1];
-    rubikova[2][3][1]=rubikova[3][2][1];
-    rubikova[3][2][1]=rubikova[2][1][1];
-    rubikova[2][1][1]=rubikova[1][2][1];
-    rubikova[1][2][1]=tmp;
+    tmp=RubikovaKocka::kocka[0][2][0];
+    RubikovaKocka::kocka[0][2][0]=RubikovaKocka::kocka[0][0][0];
+    RubikovaKocka::kocka[0][0][0]=RubikovaKocka::kocka[2][0][0];
+    RubikovaKocka::kocka[2][0][0]=RubikovaKocka::kocka[2][2][0];
+    RubikovaKocka::kocka[2][2][0]=tmp;
+    tmp=RubikovaKocka::kocka[1][2][0];
+    RubikovaKocka::kocka[1][2][0]=RubikovaKocka::kocka[0][1][0];
+    RubikovaKocka::kocka[0][1][0]=RubikovaKocka::kocka[1][0][0];
+    RubikovaKocka::kocka[1][0][0]=RubikovaKocka::kocka[2][1][0];
+    RubikovaKocka::kocka[2][1][0]=tmp;
+}
+
+void RubikovaKocka::kazaljka_pz()
+{
+    Kocka tmp;
+     cout << "?????" <<endl;
+    cout << tmp.id << endl;
+    cout << "?????" <<endl;
+    tmp=RubikovaKocka::kocka[0][2][2];
+    RubikovaKocka::kocka[0][2][2]=RubikovaKocka::kocka[2][2][2];
+    RubikovaKocka::kocka[2][2][2]=RubikovaKocka::kocka[2][0][2];
+    RubikovaKocka::kocka[2][0][2]=RubikovaKocka::kocka[0][0][2];
+    RubikovaKocka::kocka[0][0][2]=tmp;
+    tmp=RubikovaKocka::kocka[1][2][2];
+    RubikovaKocka::kocka[1][2][2]=RubikovaKocka::kocka[2][1][2];
+    RubikovaKocka::kocka[2][1][2]=RubikovaKocka::kocka[1][0][2];
+    RubikovaKocka::kocka[1][0][2]=RubikovaKocka::kocka[0][1][2];
+    RubikovaKocka::kocka[0][1][2]=tmp;
+}
+
+void RubikovaKocka::kazaljka_mz()
+{
+    Kocka tmp;
+    tmp=RubikovaKocka::kocka[0][2][0];
+    RubikovaKocka::kocka[0][2][0]=RubikovaKocka::kocka[2][2][0];
+    RubikovaKocka::kocka[2][2][0]=RubikovaKocka::kocka[2][0][0];
+    RubikovaKocka::kocka[2][0][0]=RubikovaKocka::kocka[0][0][0];
+    RubikovaKocka::kocka[0][0][0]=tmp;
+    tmp=RubikovaKocka::kocka[1][2][0];
+    RubikovaKocka::kocka[1][2][0]=RubikovaKocka::kocka[2][1][0];
+    RubikovaKocka::kocka[2][1][0]=RubikovaKocka::kocka[1][0][0];
+    RubikovaKocka::kocka[1][0][0]=RubikovaKocka::kocka[0][1][0];
+    RubikovaKocka::kocka[0][1][0]=tmp;
 }
 
 void RubikovaKocka::kazaljka_py()
 {
     Kocka tmp;
-    tmp=rubikova[1][3][1];
-    rubikova[1][3][1]=rubikova[3][3][1];
-    rubikova[3][3][1]=rubikova[3][3][3];
-    rubikova[3][3][3]=rubikova[1][3][3];
-    rubikova[1][3][3]=tmp;
-    tmp=rubikova[1][3][2];
-    rubikova[1][3][2]=rubikova[2][3][1];
-    rubikova[2][3][1]=rubikova[3][3][2];
-    rubikova[3][3][2]=rubikova[2][3][3];
-    rubikova[2][3][3]=tmp;
-}
-
-void RubikovaKocka::kazaljka_my()
-{
-    Kocka tmp;
-    tmp=rubikova[1][1][1];
-    rubikova[1][1][1]=rubikova[3][1][1];
-    rubikova[3][1][1]=rubikova[3][1][3];
-    rubikova[3][1][3]=rubikova[1][1][3];
-    rubikova[1][1][3]=tmp;
-    tmp=rubikova[1][1][2];
-    rubikova[1][1][2]=rubikova[2][1][1];
-    rubikova[2][1][1]=rubikova[3][1][2];
-    rubikova[3][1][2]=rubikova[2][1][3];
-    rubikova[2][1][3]=tmp;
-}
-
-void RubikovaKocka::suprotno_py()
-{
-    Kocka tmp;
-    tmp=rubikova[1][3][1];
-    rubikova[1][3][1]=rubikova[1][3][3];
-    rubikova[1][3][3]=rubikova[3][3][3];
-    rubikova[3][3][3]=rubikova[3][3][1];
-    rubikova[3][3][1]=tmp;
-    tmp=rubikova[1][3][2];
-    rubikova[1][3][2]=rubikova[2][3][3];
-    rubikova[2][3][3]=rubikova[3][3][2];
-    rubikova[3][3][2]=rubikova[2][3][1];
-    rubikova[2][3][1]=tmp;
+    tmp=RubikovaKocka::kocka[0][2][0];
+    RubikovaKocka::kocka[0][2][0]=RubikovaKocka::kocka[2][2][0];
+    RubikovaKocka::kocka[2][2][0]=RubikovaKocka::kocka[2][2][2];
+    RubikovaKocka::kocka[2][2][2]=RubikovaKocka::kocka[0][2][2];
+    RubikovaKocka::kocka[0][2][2]=tmp;
+    tmp=RubikovaKocka::kocka[0][2][1];
+    RubikovaKocka::kocka[0][2][1]=RubikovaKocka::kocka[1][2][0];
+    RubikovaKocka::kocka[1][2][0]=RubikovaKocka::kocka[2][2][1];
+    RubikovaKocka::kocka[2][2][1]=RubikovaKocka::kocka[1][2][2];
+    RubikovaKocka::kocka[1][2][2]=tmp;
 }
 
 void RubikovaKocka::suprotno_my()
 {
     Kocka tmp;
-    tmp=rubikova[1][1][1];
-    rubikova[1][1][1]=rubikova[1][1][3];
-    rubikova[1][1][3]=rubikova[3][1][3];
-    rubikova[3][1][3]=rubikova[3][1][1];
-    rubikova[3][1][1]=tmp;
-    tmp=rubikova[1][1][2];
-    rubikova[1][1][2]=rubikova[2][1][3];
-    rubikova[2][1][3]=rubikova[3][1][2];
-    rubikova[3][1][2]=rubikova[2][1][1];
-    rubikova[2][1][1]=tmp;
+    tmp=RubikovaKocka::kocka[0][0][0];
+    RubikovaKocka::kocka[0][0][0]=RubikovaKocka::kocka[2][0][0];
+    RubikovaKocka::kocka[2][0][0]=RubikovaKocka::kocka[2][0][2];
+    RubikovaKocka::kocka[2][0][2]=RubikovaKocka::kocka[0][0][2];
+    RubikovaKocka::kocka[0][0][2]=tmp;
+    tmp=RubikovaKocka::kocka[0][0][1];
+    RubikovaKocka::kocka[0][0][1]=RubikovaKocka::kocka[1][0][0];
+    RubikovaKocka::kocka[1][0][0]=RubikovaKocka::kocka[2][0][1];
+    RubikovaKocka::kocka[2][0][1]=RubikovaKocka::kocka[1][0][2];
+    RubikovaKocka::kocka[1][0][2]=tmp;
 }
 
-void RubikovaKocka::kazaljka_px()
+void RubikovaKocka::suprotno_py()
 {
     Kocka tmp;
-    tmp=rubikova[3][3][1];
-    rubikova[3][3][1]=rubikova[3][1][1];
-    rubikova[3][1][1]=rubikova[3][1][3];
-    rubikova[3][1][3]=rubikova[3][3][3];
-    rubikova[3][3][3]=tmp;
-    tmp=rubikova[3][3][2];
-    rubikova[3][3][2]=rubikova[3][2][1];
-    rubikova[3][2][1]=rubikova[3][1][2];
-    rubikova[3][1][2]=rubikova[3][2][3];
-    rubikova[3][2][3]=tmp;
+    tmp=RubikovaKocka::kocka[0][2][0];
+    RubikovaKocka::kocka[0][2][0]=RubikovaKocka::kocka[0][2][2];
+    RubikovaKocka::kocka[0][2][2]=RubikovaKocka::kocka[2][2][2];
+    RubikovaKocka::kocka[2][2][2]=RubikovaKocka::kocka[2][2][0];
+    RubikovaKocka::kocka[2][2][0]=tmp;
+    tmp=RubikovaKocka::kocka[0][2][1];
+    RubikovaKocka::kocka[0][2][1]=RubikovaKocka::kocka[1][2][2];
+    RubikovaKocka::kocka[1][2][2]=RubikovaKocka::kocka[2][2][1];
+    RubikovaKocka::kocka[2][2][1]=RubikovaKocka::kocka[1][2][0];
+    RubikovaKocka::kocka[1][2][0]=tmp;
 }
 
-void RubikovaKocka::kazaljka_mx()
+void RubikovaKocka::kazaljka_my()
 {
     Kocka tmp;
-    tmp=rubikova[1][3][1];
-    rubikova[1][3][1]=rubikova[1][1][1];
-    rubikova[1][1][1]=rubikova[1][1][3];
-    rubikova[1][1][3]=rubikova[1][3][3];
-    rubikova[1][3][3]=tmp;
-    tmp=rubikova[1][3][2];
-    rubikova[1][3][2]=rubikova[1][2][1];
-    rubikova[1][2][1]=rubikova[1][1][2];
-    rubikova[1][1][2]=rubikova[1][2][3];
-    rubikova[1][2][3]=tmp;
+    tmp=RubikovaKocka::kocka[0][0][0];
+    RubikovaKocka::kocka[0][0][0]=RubikovaKocka::kocka[0][0][2];
+    RubikovaKocka::kocka[0][0][2]=RubikovaKocka::kocka[2][0][2];
+    RubikovaKocka::kocka[2][0][2]=RubikovaKocka::kocka[2][0][0];
+    RubikovaKocka::kocka[2][0][0]=tmp;
+    tmp=RubikovaKocka::kocka[0][0][1];
+    RubikovaKocka::kocka[0][0][1]=RubikovaKocka::kocka[1][0][2];
+    RubikovaKocka::kocka[1][0][2]=RubikovaKocka::kocka[2][0][1];
+    RubikovaKocka::kocka[2][0][1]=RubikovaKocka::kocka[1][0][0];
+    RubikovaKocka::kocka[1][0][0]=tmp;
 }
 
 void RubikovaKocka::suprotno_px()
 {
     Kocka tmp;
-    tmp=rubikova[3][3][1];
-    rubikova[3][3][1]=rubikova[3][3][3];
-    rubikova[3][3][3]=rubikova[3][1][3];
-    rubikova[3][1][3]=rubikova[3][1][1];
-    rubikova[3][1][1]=tmp;
-    tmp=rubikova[3][3][2];
-    rubikova[3][3][2]=rubikova[3][2][3];
-    rubikova[3][2][3]=rubikova[3][1][2];
-    rubikova[3][1][2]=rubikova[3][2][1];
-    rubikova[3][2][1]=tmp;
+    tmp=RubikovaKocka::kocka[2][2][0];
+    RubikovaKocka::kocka[2][2][0]=RubikovaKocka::kocka[2][0][0];
+    RubikovaKocka::kocka[2][0][0]=RubikovaKocka::kocka[2][0][2];
+    RubikovaKocka::kocka[2][0][2]=RubikovaKocka::kocka[2][2][2];
+    RubikovaKocka::kocka[2][2][2]=tmp;
+    tmp=RubikovaKocka::kocka[2][2][1];
+    RubikovaKocka::kocka[2][2][1]=RubikovaKocka::kocka[2][1][0];
+    RubikovaKocka::kocka[2][1][0]=RubikovaKocka::kocka[2][0][1];
+    RubikovaKocka::kocka[2][0][1]=RubikovaKocka::kocka[2][1][2];
+    RubikovaKocka::kocka[2][1][2]=tmp;
 }
 
 void RubikovaKocka::suprotno_mx()
 {
     Kocka tmp;
-    tmp=rubikova[1][3][1];
-    rubikova[1][3][1]=rubikova[1][3][3];
-    rubikova[1][3][3]=rubikova[1][1][3];
-    rubikova[1][1][3]=rubikova[1][1][1];
-    rubikova[1][1][1]=tmp;
-    tmp=rubikova[1][3][2];
-    rubikova[1][3][2]=rubikova[1][2][3];
-    rubikova[1][2][3]=rubikova[1][1][2];
-    rubikova[1][1][2]=rubikova[1][2][1];
-    rubikova[1][2][1]=tmp;
+    tmp=RubikovaKocka::kocka[0][2][0];
+    RubikovaKocka::kocka[0][2][0]=RubikovaKocka::kocka[0][0][0];
+    RubikovaKocka::kocka[0][0][0]=RubikovaKocka::kocka[0][0][2];
+    RubikovaKocka::kocka[0][0][2]=RubikovaKocka::kocka[0][2][2];
+    RubikovaKocka::kocka[0][2][2]=tmp;
+    tmp=RubikovaKocka::kocka[0][2][1];
+    RubikovaKocka::kocka[0][2][1]=RubikovaKocka::kocka[0][1][0];
+    RubikovaKocka::kocka[0][1][0]=RubikovaKocka::kocka[0][0][1];
+    RubikovaKocka::kocka[0][0][1]=RubikovaKocka::kocka[0][1][2];
+    RubikovaKocka::kocka[0][1][2]=tmp;
+}
+
+void RubikovaKocka::kazaljka_px()
+{
+    Kocka tmp;
+    tmp=RubikovaKocka::kocka[2][2][0];
+    RubikovaKocka::kocka[2][2][0]=RubikovaKocka::kocka[2][2][2];
+    RubikovaKocka::kocka[2][2][2]=RubikovaKocka::kocka[2][0][2];
+    RubikovaKocka::kocka[2][0][2]=RubikovaKocka::kocka[2][0][0];
+    RubikovaKocka::kocka[2][0][0]=tmp;
+    tmp=RubikovaKocka::kocka[2][2][1];
+    RubikovaKocka::kocka[2][2][1]=RubikovaKocka::kocka[2][1][2];
+    RubikovaKocka::kocka[2][1][2]=RubikovaKocka::kocka[2][0][1];
+    RubikovaKocka::kocka[2][0][1]=RubikovaKocka::kocka[2][1][0];
+    RubikovaKocka::kocka[2][1][0]=tmp;
+}
+
+void RubikovaKocka::kazaljka_mx()
+{
+
+    Kocka tmp;
+    tmp=RubikovaKocka::kocka[0][2][0];
+    RubikovaKocka::kocka[0][2][0]=RubikovaKocka::kocka[0][2][2];
+    RubikovaKocka::kocka[0][2][2]=RubikovaKocka::kocka[0][0][2];
+    RubikovaKocka::kocka[0][0][2]=RubikovaKocka::kocka[0][0][0];
+    RubikovaKocka::kocka[0][0][0]=tmp;
+    tmp=RubikovaKocka::kocka[0][2][1];
+    RubikovaKocka::kocka[0][2][1]=RubikovaKocka::kocka[0][1][2];
+    RubikovaKocka::kocka[0][1][2]=RubikovaKocka::kocka[0][0][1];
+    RubikovaKocka::kocka[0][0][1]=RubikovaKocka::kocka[0][1][0];
+    RubikovaKocka::kocka[0][1][0]=tmp;
 }
